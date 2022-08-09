@@ -1,0 +1,9 @@
+# Game Building Session: Find the Ninja!
+
+## Introduction @showdialog
+In this tutorial, you will create a game with 3 kinds of sprites: Ninja, Player, and Enemy. The Ninja sprite will be hidden among many Enemy sprites, and you’ll need to use the Player sprite to find it! 
+Click Ok to get started!
+
+![Code Ninjas Logo]()
+
+## Step 1
