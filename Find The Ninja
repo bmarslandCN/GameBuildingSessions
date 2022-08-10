@@ -1,9 +1,657 @@
 # Game Building Session: Find the Ninja!
 
-## Introduction @showdialog
-In this tutorial, you will create a game with 3 kinds of sprites: Ninja, Player, and Enemy. The Ninja sprite will be hidden among many Enemy sprites, and you’ll need to use the Player sprite to find it! 
-Click Ok to get started!
+### @diffs true
 
-![Code Ninjas Logo]()
+## Introduction @showdialog
+
+In this tutorial, you will create a game with 3 kinds of sprites: Ninja, Player, and Enemy. The Ninja sprite will be hidden among many Enemy sprites, and you’ll need to use the Player sprite to find it! Click Ok to get started!
+![Project gif](https://github.com/bmarslandCN/GameBuildingSessions/blob/main/GBS1%20into%20gif.gif?raw=true, "Find the Ninja project")
+
+![Code Ninjas logo](https://github.com/bmarslandCN/GameBuildingSessions/blob/main/Code_Ninjas_Color_Horizontal.jpg?raw=true "Code Ninjas logo")
 
 ## Step 1
+Begin the project by setting a background color on the screen!
+
+- :tree: Open ``||scene:Scene||`` then drag ``||scene:set background color||`` into the ``||loops:on start||`` container already in the editor. 
+
+- :paint brush: Click the gray bubble in the ``||scene:set background color||`` block to see the different color options appear. Select a color to use as the background.
+
+- :mouse pointer: Click the Game Window tab on the left side of the screen ![Game Window Tab](https://github.com/bmarslandCN/GameBuildingSessions/blob/main/game-win-tab.png?raw=true, "Game Window tab") then click ▶ under the MakeCode game console to see the selected background color appear! 
+
+- :mouse pointer: Click back to the tutorial then click Next to go to the next step.
+
+![Code Ninjas logo](https://github.com/bmarslandCN/GameBuildingSessions/blob/main/Code_Ninjas_Color_Horizontal.jpg?raw=true "Code Ninjas logo")
+
+```blocks
+scene.setBackgroundColor(7)
+```
+
+## Step 2
+Add a Ninja sprite to the project!
+
+- :paper plane: Open ``||sprites:Sprites||`` and drag ``||variables:set sprite to||`` into the ``||loops:on start||`` container, below ``||scene:set background color||``. 
+Click the gray box and select the **My Assets** tab at the top. Select the ninja image from **My Assets**.
+
+- :keyboard: Rename the sprite by clicking ``||variables:mySprite ⏷||``. Select **Rename Variable**, then type “ninjaSprite” into the text box. 
+
+- :keyboard: Change the ninjaSprite’s Sprite Kind by clicking ``||sprites:Player ⏷||``. Select **Add a new kind**, then type “Ninja” into the text box. 
+
+- :mouse pointer: Click ▶ to see the Ninja sprite appear in the center of the screen!
+
+![Code Ninjas logo](https://github.com/bmarslandCN/GameBuildingSessions/blob/main/Code_Ninjas_Color_Horizontal.jpg?raw=true "Code Ninjas logo")
+
+```blocks
+namespace SpriteKind {export const Ninja = SpriteKind.create()}
+scene.setBackgroundColor(7)
+let ninjaSprite = sprites.create(img`
+    . . . . f f f f f . . . 
+    . . . f f f f f f f . . 
+    f . f f f f f f f f f . 
+    . f f b f f f f f b f . 
+    f . f d 1 1 b 1 1 d f . 
+    . . f f 1 f d f 1 f f . 
+    . . . f f f f f f f . . 
+    . . . . f f f f f . . . 
+    . . . f f f f f f f . . 
+    . . f f f f f f f f f . 
+    . . f f f f f f f f f . 
+    . f . f f f f f f f . f 
+    . f . f f f f f f f . f 
+    . . . . f f f f f . . . 
+    . . . . f f . f f . . . 
+    . . . f f f . f f f . . 
+    `, SpriteKind.Ninja)
+```
+
+## Step 3
+Code the Ninja sprite to appear in a random position!
+
+- :paper plane: Open ``||sprites:Sprites||`` and drag ``||sprites:set sprite position to||`` below the code in the ``||loops:on start||`` container. Click ``||variables:mySprite ⏷||``, then select **ninjaSprite** from the dropdown. 
+
+- :calculator: Open ``||math:Math||`` and drag ``||math:pick random||`` into the x bubble in ``||sprites:set sprite position to||``. Replace 10 with 160, so that the Ninja sprite will appear in a random x-position on screen.
+
+- :calculator: Open ``||math:Math||`` again and drag ``||math:pick random||`` into the y bubble in ``||sprites:set sprite position to||``. Replace 10 with 120, so that the Ninja sprite will appear in a random y-position on screen.
+
+- :mouse pointer: Click ▶ to see the Ninja sprite appear in a random position on screen!
+
+![Code Ninjas logo](https://github.com/bmarslandCN/GameBuildingSessions/blob/main/Code_Ninjas_Color_Horizontal.jpg?raw=true "Code Ninjas logo")
+
+```blocks
+namespace SpriteKind {export const Ninja = SpriteKind.create()}
+scene.setBackgroundColor(7)
+let ninjaSprite = sprites.create(img`
+    . . . . f f f f f . . . 
+    . . . f f f f f f f . . 
+    f . f f f f f f f f f . 
+    . f f b f f f f f b f . 
+    f . f d 1 1 b 1 1 d f . 
+    . . f f 1 f d f 1 f f . 
+    . . . f f f f f f f . . 
+    . . . . f f f f f . . . 
+    . . . f f f f f f f . . 
+    . . f f f f f f f f f . 
+    . . f f f f f f f f f . 
+    . f . f f f f f f f . f 
+    . f . f f f f f f f . f 
+    . . . . f f f f f . . . 
+    . . . . f f . f f . . . 
+    . . . f f f . f f f . . 
+    `, SpriteKind.Ninja)
+ninjaSprite.setPosition(randint(0, 160), randint(0, 120)```
+
+
+## Step 4
+Add another sprite to the project!
+
+- :paper plane: Open ``||sprites:Sprites||`` and drag ``||variables:set sprite to||`` into the ``||loops:on start||`` container. Click the gray box, then select the Gallery tab at the top of the screen. Select any image for the sprite. 
+
+- :keyboard: Rename the sprite “hidingSprite'' by clicking ``||variables:mySprite ⏷||``. Then, change the hidingSprite’s Sprite Kind by clicking ``||sprites:Player ⏷||`` and selecting **Enemy**. 
+
+- :mouse pointer:  Assign the Enemy sprite to a random position. Right click to **duplicate** the Ninja sprite’s ``||sprites:set sprite position to||`` block. Add the duplicated block below the Enemy sprite’s ``||variables:set sprite to||`` block. Then, change the sprite name from ninjaSprite to hidingSprite.
+
+- :mouse pointer: Click ▶ to see the Enemy sprite appear in a random position on screen!
+
+![Code Ninjas logo](https://github.com/bmarslandCN/GameBuildingSessions/blob/main/Code_Ninjas_Color_Horizontal.jpg?raw=true "Code Ninjas logo")
+
+```blocks
+namespace SpriteKind {export const Ninja = SpriteKind.create()}
+scene.setBackgroundColor(7)
+let ninjaSprite = sprites.create(img`
+    . . . . f f f f f . . . 
+    . . . f f f f f f f . . 
+    f . f f f f f f f f f . 
+    . f f b f f f f f b f . 
+    f . f d 1 1 b 1 1 d f . 
+    . . f f 1 f d f 1 f f . 
+    . . . f f f f f f f . . 
+    . . . . f f f f f . . . 
+    . . . f f f f f f f . . 
+    . . f f f f f f f f f . 
+    . . f f f f f f f f f . 
+    . f . f f f f f f f . f 
+    . f . f f f f f f f . f 
+    . . . . f f f f f . . . 
+    . . . . f f . f f . . . 
+    . . . f f f . f f f . . 
+    `, SpriteKind.Ninja)
+ninjaSprite.setPosition(randint(0, 160), randint(0, 120))
+let hidingSprite = sprites.create(img`
+    . f f f . f f f f . f f f . 
+    f f f f f c c c c f f f f f 
+    f f f f b c c c c b f f f f 
+    f f f c 3 c c c c 3 c f f f 
+    . f 3 3 c c c c c c 3 3 f . 
+    . f c c c c 4 4 c c c c f . 
+    . f f c c 4 4 4 4 c c f f . 
+    . f f f b f 4 4 f b f f f . 
+    . f f 4 1 f d d f 1 4 f f . 
+    . . f f d d d d d d f f . . 
+    . . e f e 4 4 4 4 e f e . . 
+    . e 4 f b 3 3 3 3 b f 4 e . 
+    . 4 d f 3 3 3 3 3 3 c d 4 . 
+    . 4 4 f 6 6 6 6 6 6 f 4 4 . 
+    . . . . f f f f f f . . . . 
+    . . . . f f . . f f . . . . 
+    `, SpriteKind.Enemy)
+hidingSprite.setPosition(randint(0, 160), randint(0, 120))
+```
+
+## Step 5
+Create lots of Enemy sprites for the Ninja sprite to hide behind!
+
+- :repeat: Open ``||loops:Loops||`` and drag a ``||loops:repeat||`` loop to the bottom of the ``||loops:on start||`` container. 
+
+- :mouse pointer: Drag the Enemy sprite’s ``||variables:set sprite to||`` and ``||sprites:set sprite position to||`` blocks inside of the ``||loops:repeat||`` loop. 
+
+- :mouse pointer:  Click ▶ to see 4 Enemy sprites appear in random positions on screen. Then, tinker with the number in the white bubble of the ``||loops:repeat||`` loop to create enough Enemy sprites to hide the Ninja sprite.
+
+![Code Ninjas logo](https://github.com/bmarslandCN/GameBuildingSessions/blob/main/Code_Ninjas_Color_Horizontal.jpg?raw=true "Code Ninjas logo")
+```blocks
+namespace SpriteKind {export const Ninja = SpriteKind.create()}
+let hidingSprite: Sprite = null
+scene.setBackgroundColor(7)
+let ninjaSprite = sprites.create(img`
+    . . . . f f f f f . . . 
+    . . . f f f f f f f . . 
+    f . f f f f f f f f f . 
+    . f f b f f f f f b f . 
+    f . f d 1 1 b 1 1 d f . 
+    . . f f 1 f d f 1 f f . 
+    . . . f f f f f f f . . 
+    . . . . f f f f f . . . 
+    . . . f f f f f f f . . 
+    . . f f f f f f f f f . 
+    . . f f f f f f f f f . 
+    . f . f f f f f f f . f 
+    . f . f f f f f f f . f 
+    . . . . f f f f f . . . 
+    . . . . f f . f f . . . 
+    . . . f f f . f f f . . 
+    `, SpriteKind.Ninja)
+ninjaSprite.setPosition(randint(0, 160), randint(0, 120))
+for (let index = 0; index < 30; index++) {
+    hidingSprite = sprites.create(img`
+        . f f f . f f f f . f f f . 
+        f f f f f c c c c f f f f f 
+        f f f f b c c c c b f f f f 
+        f f f c 3 c c c c 3 c f f f 
+        . f 3 3 c c c c c c 3 3 f . 
+        . f c c c c 4 4 c c c c f . 
+        . f f c c 4 4 4 4 c c f f . 
+        . f f f b f 4 4 f b f f f . 
+        . f f 4 1 f d d f 1 4 f f . 
+        . . f f d d d d d d f f . . 
+        . . e f e 4 4 4 4 e f e . . 
+        . e 4 f b 3 3 3 3 b f 4 e . 
+        . 4 d f 3 3 3 3 3 3 c d 4 . 
+        . 4 4 f 6 6 6 6 6 6 f 4 4 . 
+        . . . . f f f f f f . . . . 
+        . . . . f f . . f f . . . . 
+        `, SpriteKind.Enemy)
+    hidingSprite.setPosition(randint(0, 160), randint(0, 120))
+}
+```
+## Step 6
+Create a Player sprite to help locate the Ninja sprite!
+
+- :paper plane: Open ``||sprites:Sprites||`` and drag ``||variables:set sprite to||`` into the bottom of the ``||loops:on start||`` container. Click the gray box, then select the magnifying glass image from **My Assets**.
+
+- :keyboard: Rename the sprite “lookingGlass” by clicking ``||variables:mySprite ⏷||``. Keep the Sprite Kind set to Player.
+
+- :paper plane: Open ``||sprites:Sprites||`` again and drag ``||sprites:set sprite position to||`` below the Player sprite’s ``||variables:set sprite to||`` block. Change the sprite name to lookingGlass. Then, click in the x and y bubbles to use the slider to position the Player sprite in the center of the screen.
+
+- :mouse pointer: Click ▶ to see the Player sprite appear in the center of the screen!
+
+![Code Ninjas logo](https://github.com/bmarslandCN/GameBuildingSessions/blob/main/Code_Ninjas_Color_Horizontal.jpg?raw=true "Code Ninjas logo")
+
+```blocks
+namespace SpriteKind {export const Ninja = SpriteKind.create()}
+let hidingSprite: Sprite = null
+scene.setBackgroundColor(7)
+let ninjaSprite = sprites.create(img`
+    . . . . f f f f f . . . 
+    . . . f f f f f f f . . 
+    f . f f f f f f f f f . 
+    . f f b f f f f f b f . 
+    f . f d 1 1 b 1 1 d f . 
+    . . f f 1 f d f 1 f f . 
+    . . . f f f f f f f . . 
+    . . . . f f f f f . . . 
+    . . . f f f f f f f . . 
+    . . f f f f f f f f f . 
+    . . f f f f f f f f f . 
+    . f . f f f f f f f . f 
+    . f . f f f f f f f . f 
+    . . . . f f f f f . . . 
+    . . . . f f . f f . . . 
+    . . . f f f . f f f . . 
+    `, SpriteKind.Ninja)
+ninjaSprite.setPosition(randint(0, 160), randint(0, 120))
+for (let index = 0; index < 30; index++) {
+    hidingSprite = sprites.create(img`
+        . f f f . f f f f . f f f . 
+        f f f f f c c c c f f f f f 
+        f f f f b c c c c b f f f f 
+        f f f c 3 c c c c 3 c f f f 
+        . f 3 3 c c c c c c 3 3 f . 
+        . f c c c c 4 4 c c c c f . 
+        . f f c c 4 4 4 4 c c f f . 
+        . f f f b f 4 4 f b f f f . 
+        . f f 4 1 f d d f 1 4 f f . 
+        . . f f d d d d d d f f . . 
+        . . e f e 4 4 4 4 e f e . . 
+        . e 4 f b 3 3 3 3 b f 4 e . 
+        . 4 d f 3 3 3 3 3 3 c d 4 . 
+        . 4 4 f 6 6 6 6 6 6 f 4 4 . 
+        . . . . f f f f f f . . . . 
+        . . . . f f . . f f . . . . 
+        `, SpriteKind.Enemy)
+    hidingSprite.setPosition(randint(0, 160), randint(0, 120))
+}
+let lookingGlass = sprites.create(img`
+    . . . f f f f f f . . . . . . . 
+    . . f c c c c c c f . . . . . . 
+    . f c 6 9 9 9 9 6 c f . . . . . 
+    . f 6 9 9 1 1 9 9 6 f . . . . . 
+    f c 9 9 9 9 1 1 9 9 c f . . . . 
+    f c 9 9 9 9 9 9 9 9 c f . . . . 
+    f c 9 9 9 9 9 9 9 9 c f . . . . 
+    . f 6 9 9 9 9 9 9 6 f . . . . . 
+    . f c 6 9 9 9 9 6 c f . . . . . 
+    . . f c c c c c c f f . . . . . 
+    . . . f f f f f f b d f . . . . 
+    . . . . . . . . f 4 4 d f . . . 
+    . . . . . . . . . f 4 4 d f . . 
+    . . . . . . . . . . f 4 4 d f . 
+    . . . . . . . . . . . f 4 4 f . 
+    . . . . . . . . . . . . f f . . 
+    `, SpriteKind.Player)
+lookingGlass.setPosition(80, 60)
+```
+## Step 7
+Code the Player sprite to move around the screen!
+
+- :game: Open ``||controller:Controller||`` and drag ``||controller:move sprite with buttons||`` to the bottom of the ``||loops:on start||`` container. Click **+** to change the speed of the Player sprite. Replace 100 in the vx and vy bubbles with 50. 
+
+- :paper plane: Open ``||sprites:Sprites||`` and drag ``||sprites:set sprite stay in screen||`` below ``||controller:move sprite with buttons||`` to keep the Player sprite from moving off screen. 
+
+- :mouse pointer: Click ▶ then use the direction buttons to move the Player sprite around the screen.
+
+![Code Ninjas logo](https://github.com/bmarslandCN/GameBuildingSessions/blob/main/Code_Ninjas_Color_Horizontal.jpg?raw=true "Code Ninjas logo")
+
+```blocks
+namespace SpriteKind {export const Ninja = SpriteKind.create()}
+let hidingSprite: Sprite = null
+scene.setBackgroundColor(7)
+let ninjaSprite = sprites.create(img`
+    . . . . f f f f f . . . 
+    . . . f f f f f f f . . 
+    f . f f f f f f f f f . 
+    . f f b f f f f f b f . 
+    f . f d 1 1 b 1 1 d f . 
+    . . f f 1 f d f 1 f f . 
+    . . . f f f f f f f . . 
+    . . . . f f f f f . . . 
+    . . . f f f f f f f . . 
+    . . f f f f f f f f f . 
+    . . f f f f f f f f f . 
+    . f . f f f f f f f . f 
+    . f . f f f f f f f . f 
+    . . . . f f f f f . . . 
+    . . . . f f . f f . . . 
+    . . . f f f . f f f . . 
+    `, SpriteKind.Ninja)
+ninjaSprite.setPosition(randint(0, 160), randint(0, 120))
+for (let index = 0; index < 30; index++) {
+    hidingSprite = sprites.create(img`
+        . f f f . f f f f . f f f . 
+        f f f f f c c c c f f f f f 
+        f f f f b c c c c b f f f f 
+        f f f c 3 c c c c 3 c f f f 
+        . f 3 3 c c c c c c 3 3 f . 
+        . f c c c c 4 4 c c c c f . 
+        . f f c c 4 4 4 4 c c f f . 
+        . f f f b f 4 4 f b f f f . 
+        . f f 4 1 f d d f 1 4 f f . 
+        . . f f d d d d d d f f . . 
+        . . e f e 4 4 4 4 e f e . . 
+        . e 4 f b 3 3 3 3 b f 4 e . 
+        . 4 d f 3 3 3 3 3 3 c d 4 . 
+        . 4 4 f 6 6 6 6 6 6 f 4 4 . 
+        . . . . f f f f f f . . . . 
+        . . . . f f . . f f . . . . 
+        `, SpriteKind.Enemy)
+    hidingSprite.setPosition(randint(0, 160), randint(0, 120))
+}
+let lookingGlass = sprites.create(img`
+    . . . f f f f f f . . . . . . . 
+    . . f c c c c c c f . . . . . . 
+    . f c 6 9 9 9 9 6 c f . . . . . 
+    . f 6 9 9 1 1 9 9 6 f . . . . . 
+    f c 9 9 9 9 1 1 9 9 c f . . . . 
+    f c 9 9 9 9 9 9 9 9 c f . . . . 
+    f c 9 9 9 9 9 9 9 9 c f . . . . 
+    . f 6 9 9 9 9 9 9 6 f . . . . . 
+    . f c 6 9 9 9 9 6 c f . . . . . 
+    . . f c c c c c c f f . . . . . 
+    . . . f f f f f f b d f . . . . 
+    . . . . . . . . f 4 4 d f . . . 
+    . . . . . . . . . f 4 4 d f . . 
+    . . . . . . . . . . f 4 4 d f . 
+    . . . . . . . . . . . f 4 4 f . 
+    . . . . . . . . . . . . f f . . 
+    `, SpriteKind.Player)
+lookingGlass.setPosition(80, 60)
+controller.moveSprite(lookingGlass, 50, 50)
+lookingGlass.setStayInScreen(true)
+```
+## Step 8
+Code something to happen when the Player sprite finds the Ninja sprite!
+
+- :paper plane: Open ``||sprites:Sprites||`` and drag an ``||sprites:on sprite overlaps sprite||`` container into the editor. 
+
+- :blank: Keep the first Sprite Kind set to Player.
+
+- :mouse pointer: Change the Sprite Kind of the otherSprite by clicking the second ``||sprites:Player ⏷||``. Select Ninja from the dropdown. 
+
+![Code Ninjas logo](https://github.com/bmarslandCN/GameBuildingSessions/blob/main/Code_Ninjas_Color_Horizontal.jpg?raw=true "Code Ninjas logo")
+
+```blocks
+namespace SpriteKind {export const Ninja = SpriteKind.create()}
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Ninja, function (sprite, otherSprite) {})
+```
+## Step 9
+Code the Enemy sprites to disappear when the Player sprite finds the Ninja sprite!
+
+- :paper plane: Open ``||sprites:Sprites||`` and drag ``||sprites:destroy all sprites of kind||`` into the ``||sprites:on sprite overlaps sprite||`` container. Click ``||sprites:Player ⏷||`` to change the Sprite Kind to Enemy.
+
+- :paper plane: Open ``||sprites:Sprites||`` and drag ``||sprites:sprite say||`` below ``||sprites:destroy all sprites of kind||``. Drag an ``||variables:otherSprite||`` bubble from the ``||sprites:on sprite overlaps sprite||`` container into the sprite name area on the ``||sprites:sprite say||`` block. 
+
+- :keyboard: Click the white bubble to type a message for the Ninja sprite to say once it has been found. 
+
+- :mouse pointer: Click ▶ to see what happens when the Player sprite overlaps the Ninja sprite on screen!
+
+![Code Ninjas logo](https://github.com/bmarslandCN/GameBuildingSessions/blob/main/Code_Ninjas_Color_Horizontal.jpg?raw=true "Code Ninjas logo")
+
+```blocks
+namespace SpriteKind {export const Ninja = SpriteKind.create()}
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Ninja, function (sprite, otherSprite) {
+    sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
+    otherSprite.sayText("You found me!", 2000, true)
+})
+```
+## Step 10
+Change the Ninja sprite’s size and position once it has been found!
+
+- :paper plane: Open ``||sprites:Sprites||`` and drag ``||sprites:change sprite scale by||`` below ``||sprites:destroy all sprites of kind||``. Drag an ``||variables:otherSprite||`` bubble into the sprite name area. Replace the 1 in the white bubble by typing 2, so that the Ninja sprite grows to twice its size. Keep the anchor set to **Middle**.
+
+- :paper plane: Open ``||sprites:Sprites||`` and drag ``||sprites:set sprite position to||`` below ``||sprites:change sprite scale by||``. Drag an ``||variables:otherSprite||`` bubble into the sprite name area. Click in the x and y bubbles to use the slider to position the Ninja sprite in the center of the screen.
+
+- :mouse pointer: Click ▶ to see the Ninja sprite grow and change position once overlapped by the Player sprite!
+
+![Code Ninjas logo](https://github.com/bmarslandCN/GameBuildingSessions/blob/main/Code_Ninjas_Color_Horizontal.jpg?raw=true "Code Ninjas logo")
+
+```blocks
+namespace SpriteKind {export const Ninja = SpriteKind.create()}
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Ninja, function (sprite, otherSprite) {
+    sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
+    otherSprite.sayText("You found me!", 2000, true)
+    otherSprite.changeScale(2, ScaleAnchor.Middle)
+    otherSprite.setPosition(80, 60)
+})
+```
+## Step 11
+Code the project to end once the Ninja has been found!
+
+- :repeat: Open ``||loops:Loops||`` and drag ``||loops:pause||`` below the ``||sprites:sprite say||`` block in the ``||sprites:on sprite overlaps sprite||`` container. Change the number in the white bubble to 2000, so that the text can be seen on screen for 2 seconds, before the project ends.
+
+- :circle: Open ``||game:Game||`` and drag ``||game:game over||`` below ``||loops:pause||``. Set the toggle to ``||loops:<WIN>||``, then click **+** to add an effect to the game over screen.
+
+- :mouse pointer: Click ▶ to see the game end in a win once the Player sprite has overlapped the Ninja sprite.
+
+![Code Ninjas logo](https://github.com/bmarslandCN/GameBuildingSessions/blob/main/Code_Ninjas_Color_Horizontal.jpg?raw=true "Code Ninjas logo")
+
+```blocks
+namespace SpriteKind {export const Ninja = SpriteKind.create()}
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Ninja, function (sprite, otherSprite) {
+    sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
+    otherSprite.sayText("You found me!", 2000, true)
+    otherSprite.changeScale(2, ScaleAnchor.Middle)
+    otherSprite.setPosition(80, 60)
+    pause(2000)
+    game.over(true, effects.confetti)
+})
+```
+
+## Step 12
+Use a countdown ***variable*** to add a challenge to the project!
+
+- :id card: Open ``||info:Info||`` and drag ``||info:start countdown||`` to the bottom of the ``||loops:on start||`` container. Tinker with the value in the white bubble to set how long the user will have to find the Ninja sprite.
+
+- :id card: Open ``||info:Info||`` again and drag ``||info:stop countdown||`` to the top of the ``||sprites:on sprite overlaps sprite||`` container. This will stop the countdown once the Player sprite has overlapped the Ninja sprite.
+
+- :mouse pointer: Click ▶ to try and find the Ninja sprite before the countdown ends!
+
+![Code Ninjas logo](https://github.com/bmarslandCN/GameBuildingSessions/blob/main/Code_Ninjas_Color_Horizontal.jpg?raw=true "Code Ninjas logo")
+
+```blocks
+namespace SpriteKind {
+    export const Ninja = SpriteKind.create()
+}
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Ninja, function (sprite, otherSprite) {
+    info.stopCountdown()
+    sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
+    otherSprite.sayText("You found me!", 2000, true)
+    otherSprite.changeScale(2, ScaleAnchor.Middle)
+    otherSprite.setPosition(80, 60)
+    pause(2000)
+    game.over(true, effects.confetti)
+})
+let hidingSprite: Sprite = null
+scene.setBackgroundColor(7)
+let ninjaSprite = sprites.create(img`
+    . . . . f f f f f . . . 
+    . . . f f f f f f f . . 
+    f . f f f f f f f f f . 
+    . f f b f f f f f b f . 
+    f . f d 1 1 b 1 1 d f . 
+    . . f f 1 f d f 1 f f . 
+    . . . f f f f f f f . . 
+    . . . . f f f f f . . . 
+    . . . f f f f f f f . . 
+    . . f f f f f f f f f . 
+    . . f f f f f f f f f . 
+    . f . f f f f f f f . f 
+    . f . f f f f f f f . f 
+    . . . . f f f f f . . . 
+    . . . . f f . f f . . . 
+    . . . f f f . f f f . . 
+    `, SpriteKind.Ninja)
+ninjaSprite.setPosition(randint(0, 160), randint(0, 120))
+for (let index = 0; index < 30; index++) {
+    hidingSprite = sprites.create(img`
+        . f f f . f f f f . f f f . 
+        f f f f f c c c c f f f f f 
+        f f f f b c c c c b f f f f 
+        f f f c 3 c c c c 3 c f f f 
+        . f 3 3 c c c c c c 3 3 f . 
+        . f c c c c 4 4 c c c c f . 
+        . f f c c 4 4 4 4 c c f f . 
+        . f f f b f 4 4 f b f f f . 
+        . f f 4 1 f d d f 1 4 f f . 
+        . . f f d d d d d d f f . . 
+        . . e f e 4 4 4 4 e f e . . 
+        . e 4 f b 3 3 3 3 b f 4 e . 
+        . 4 d f 3 3 3 3 3 3 c d 4 . 
+        . 4 4 f 6 6 6 6 6 6 f 4 4 . 
+        . . . . f f f f f f . . . . 
+        . . . . f f . . f f . . . . 
+        `, SpriteKind.Enemy)
+    hidingSprite.setPosition(randint(0, 160), randint(0, 120))
+}
+let lookingGlass = sprites.create(img`
+    . . . f f f f f f . . . . . . . 
+    . . f c c c c c c f . . . . . . 
+    . f c 6 9 9 9 9 6 c f . . . . . 
+    . f 6 9 9 1 1 9 9 6 f . . . . . 
+    f c 9 9 9 9 1 1 9 9 c f . . . . 
+    f c 9 9 9 9 9 9 9 9 c f . . . . 
+    f c 9 9 9 9 9 9 9 9 c f . . . . 
+    . f 6 9 9 9 9 9 9 6 f . . . . . 
+    . f c 6 9 9 9 9 6 c f . . . . . 
+    . . f c c c c c c f f . . . . . 
+    . . . f f f f f f b d f . . . . 
+    . . . . . . . . f 4 4 d f . . . 
+    . . . . . . . . . f 4 4 d f . . 
+    . . . . . . . . . . f 4 4 d f . 
+    . . . . . . . . . . . f 4 4 f . 
+    . . . . . . . . . . . . f f . . 
+    `, SpriteKind.Player)
+lookingGlass.setPosition(80, 60)
+controller.moveSprite(lookingGlass, 50, 50)
+lookingGlass.setStayInScreen(true)
+info.startCountdown(10)
+```
+
+## Step 13
+Add instructions for the user at the beginning of the project!
+
+- :circle: Open ``||game:Game||`` and drag ``||game:set dialog frame to||`` below ``||scene:set background color||`` at the top of the ``||loops:on start||`` container. Click the gray box to select a dialog frame image from the Gallery.
+
+- :circle: Open ``||game:Game||`` again and drag ``||game:show long text||`` underneath ``||game:set dialog frame to||``. Type a message in the white bubble for the user to see at the beginning of the project. Click ``||game:Bottom ⏷||``, then select an option in the dropdown to change where the dialog box appears on screen. 
+
+- :mouse pointer: Click ▶ to see a dialog box appear at the beginning of the project!
+
+![Code Ninjas logo](https://github.com/bmarslandCN/GameBuildingSessions/blob/main/Code_Ninjas_Color_Horizontal.jpg?raw=true "Code Ninjas logo")
+
+```blocks
+namespace SpriteKind {
+    export const Ninja = SpriteKind.create()
+}
+let hidingSprite: Sprite = null
+scene.setBackgroundColor(7)
+game.setDialogFrame(img`
+    ..ffffffffffffffffffff..
+    .f11ff11ff11ff11ff11fff.
+    fff11ff11ff11ff11ff11f1f
+    ff1ffffffffffffffffff11f
+    f11ff11111111111111ff1ff
+    f1ff1111111111111111ffff
+    ffff1111111111111111ff1f
+    ff1f1111111111111111f11f
+    f11f1111111111111111f1ff
+    f1ff1111111111111111ffff
+    ffff1111111111111111ff1f
+    ff1f1111111111111111f11f
+    f11f1111111111111111f1ff
+    f1ff1111111111111111ffff
+    ffff1111111111111111ff1f
+    ff1f1111111111111111f11f
+    f11f1111111111111111f1ff
+    f1ff1111111111111111ffff
+    ffff1111111111111111ff1f
+    ff1ff11111111111111ff11f
+    f11ffffffffffffffffff1ff
+    f1f11ff11ff11ff11ff11fff
+    .fff11ff11ff11ff11ff11f.
+    ..ffffffffffffffffffff..
+    `)
+game.showLongText("Can you find the ninja?", DialogLayout.Center)
+let ninjaSprite = sprites.create(img`
+    . . . . f f f f f . . . 
+    . . . f f f f f f f . . 
+    f . f f f f f f f f f . 
+    . f f b f f f f f b f . 
+    f . f d 1 1 b 1 1 d f . 
+    . . f f 1 f d f 1 f f . 
+    . . . f f f f f f f . . 
+    . . . . f f f f f . . . 
+    . . . f f f f f f f . . 
+    . . f f f f f f f f f . 
+    . . f f f f f f f f f . 
+    . f . f f f f f f f . f 
+    . f . f f f f f f f . f 
+    . . . . f f f f f . . . 
+    . . . . f f . f f . . . 
+    . . . f f f . f f f . . 
+    `, SpriteKind.Ninja)
+ninjaSprite.setPosition(randint(0, 160), randint(0, 120))
+for (let index = 0; index < 30; index++) {
+    hidingSprite = sprites.create(img`
+        . f f f . f f f f . f f f . 
+        f f f f f c c c c f f f f f 
+        f f f f b c c c c b f f f f 
+        f f f c 3 c c c c 3 c f f f 
+        . f 3 3 c c c c c c 3 3 f . 
+        . f c c c c 4 4 c c c c f . 
+        . f f c c 4 4 4 4 c c f f . 
+        . f f f b f 4 4 f b f f f . 
+        . f f 4 1 f d d f 1 4 f f . 
+        . . f f d d d d d d f f . . 
+        . . e f e 4 4 4 4 e f e . . 
+        . e 4 f b 3 3 3 3 b f 4 e . 
+        . 4 d f 3 3 3 3 3 3 c d 4 . 
+        . 4 4 f 6 6 6 6 6 6 f 4 4 . 
+        . . . . f f f f f f . . . . 
+        . . . . f f . . f f . . . . 
+        `, SpriteKind.Enemy)
+    hidingSprite.setPosition(randint(0, 160), randint(0, 120))
+}
+let lookingGlass = sprites.create(img`
+    . . . f f f f f f . . . . . . . 
+    . . f c c c c c c f . . . . . . 
+    . f c 6 9 9 9 9 6 c f . . . . . 
+    . f 6 9 9 1 1 9 9 6 f . . . . . 
+    f c 9 9 9 9 1 1 9 9 c f . . . . 
+    f c 9 9 9 9 9 9 9 9 c f . . . . 
+    f c 9 9 9 9 9 9 9 9 c f . . . . 
+    . f 6 9 9 9 9 9 9 6 f . . . . . 
+    . f c 6 9 9 9 9 6 c f . . . . . 
+    . . f c c c c c c f f . . . . . 
+    . . . f f f f f f b d f . . . . 
+    . . . . . . . . f 4 4 d f . . . 
+    . . . . . . . . . f 4 4 d f . . 
+    . . . . . . . . . . f 4 4 d f . 
+    . . . . . . . . . . . f 4 4 f . 
+    . . . . . . . . . . . . f f . . 
+    `, SpriteKind.Player)
+lookingGlass.setPosition(80, 60)
+controller.moveSprite(lookingGlass, 50, 50)
+lookingGlass.setStayInScreen(true)
+info.startCountdown(10)
+```
+
+## Step 14
+Complete the project by adding customizations!
+
+- :paint brush: Tinker with the color in the ``||scene:set background color||`` block and the images in each of the ``||variables:set sprite to||`` blocks. Maybe add an extra sprite for the Ninja to hide behind by using another ``||variable:set sprite to||`` block.
+
+- :star: Use ``||sprites:sprite start effect||`` from ``||sprites:Sprites||`` to start a sprite effect or ``||music:play sound||`` from ``||music:Music||`` to play a sound when something happens in the project.
+
+- :paper plane: Or, add another ``||sprites:on sprite overlaps sprite||`` container to make something happen when the Player Sprite overlaps an Enemy sprite!
+
+- :mouse pointer: Click ▶ to see the completed project!
+
+![Code Ninjas logo](https://github.com/bmarslandCN/GameBuildingSessions/blob/main/Code_Ninjas_Color_Horizontal.jpg?raw=true "Code Ninjas logo")
+
+
